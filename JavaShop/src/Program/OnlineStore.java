@@ -13,11 +13,14 @@ public class OnlineStore {
 		User user2=new User("Alex", 2);
 		
 		Cart cart1=new Cart();
-		cart1.addProduct(new Product("Iphone 15", "Apple", 1000));
-		cart1.addProduct(new Product("Samsung S21", "Samsung", 500));
+		Product prod1=new PhysicalProduct("Iphone 15", "Apple", 30000, 14.7f, 7.6f, 141);
+		Product prod2=new PhysicalProduct("Iphone 16", "Apple", 35000, 14.7f, 7.6f, 141);
+		cart1.addProduct(prod1);
+		cart1.addProduct(prod2);
 		
 		Cart cart2=new Cart();
-		cart1.addProduct(new Product("Iphone 12", "Apple", 800));
+		Product prod3=new DigitalProduct("Grand Theft Auto V", "Rockstar Games", 1080, "All",100f);
+		cart2.addProduct(prod3);
 		
 		user1.addCart(cart1);
 		user2.addCart(cart2);
@@ -36,8 +39,22 @@ public class OnlineStore {
 		}
 		return total;
 	}
+	public static void purchase() {
+		ArrayList<Purchasable> products=new ArrayList<Purchasable>();
+		for (User user:users) {
+			for (Cart cart:user.getCarts()) {
+				products.addAll(cart.getProducts());
+			}
+		}
+		System.out.println("\nполіморфний виклик для всіх продуктів:");
+		for (Purchasable product : products) {
+		product.printInfo();
+		        }
+		    }
+
 public static void main(String[] args) {
 	System.out.println("Total value of products: "+productsCount);
+	purchase();
 	User firstUser=users.get(1);
 	if(!firstUser.getCarts().isEmpty()) {
 		Cart firstCart=firstUser.getCarts().get(0);

@@ -1,9 +1,9 @@
 package Program;
 
-public class Product {
-private String name;
-private String brand;
-private double price;
+abstract class Product implements Purchasable{
+protected String name;
+protected String brand;
+protected double price;
 
 public Product(){
 	

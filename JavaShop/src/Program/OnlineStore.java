@@ -51,10 +51,25 @@ public class OnlineStore {
 		product.printInfo();
 		        }
 		    }
+	public static Product findByName(String tempN) throws Exception {
+		ArrayList<Product> products=new ArrayList<Product>();
+		for (User user:users) {
+			for (Cart cart:user.getCarts()) {
+				products.addAll(cart.getProducts());
+			}
+		}
+		for(Product prod: products) {
+			if(prod.getName().equalsIgnoreCase(tempN)) {
+				return prod;
+			}
+		}
+			throw new Exception("Object by noticed name wasn`t found!");
+	}
 
-public static void main(String[] args) {
+public static void main(String[] args) throws Exception{
 	System.out.println("Total value of products: "+productsCount);
 	purchase();
+	findByName("Lenovo");
 	User firstUser=users.get(1);
 	if(!firstUser.getCarts().isEmpty()) {
 		Cart firstCart=firstUser.getCarts().get(0);
